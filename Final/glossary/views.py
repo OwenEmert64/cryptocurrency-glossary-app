@@ -44,3 +44,22 @@ def create_term(request):
             )
             return redirect('glossary')
     return render(request, 'glossary/create_term.html')
+
+@login_required
+def edit_term(request, term_id):
+    term = get_object_or_404(Term, id=term_id, added_by=request.user)
+    if request.method == 'POST':
+        term.term = request.POST.get('term')
+        term.definition = request.POST.get('definition')
+        term.category = request.POST.get('category')
+        term.save()
+        return redirect('glossary')
+    return render(request, 'glossary/edit_term.html', {'term': term})
+
+@login_required
+def delete_term(request, term_id):
+    term = get_object_or_404(Term, id=term_id, added_by=request.user)
+    if request.method == 'POST':
+        term.delete()
+        return redirect('glossary')
+    return render(request, 'glossary/delete_term.html', {'term': term})

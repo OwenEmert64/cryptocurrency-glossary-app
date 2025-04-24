@@ -1,12 +1,22 @@
 {% extends 'glossary/base.html' %}
 {% block content %}
-  <h2>Glossary</h2>
+  <h2>Glossary Terms</h2>
+
   <p><a href="{% url 'create_term' %}">+ Add New Term</a></p>
   <ul>
     {% for term in terms %}
-      <li><strong>{{ term.term }}</strong>: {{ term.definition }}</li>
+      <li>
+        <strong>{{ term.term }}</strong>: {{ term.definition }}
+        {% if term.category %}
+          <em>({{ term.category }})</em>
+        {% endif %}
+        {% if request.user == term.added_by %}
+          | <a href="{% url 'edit_term' term.id %}">Edit</a>
+          | <a href="{% url 'delete_term' term.id %}">Delete</a>
+        {% endif %}
+      </li>
     {% empty %}
-      <li>No terms available.</li>
+      <li>No terms yet. <a href="{% url 'create_term' %}">Add one now.</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

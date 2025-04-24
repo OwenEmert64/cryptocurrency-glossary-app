@@ -1,0 +1,10 @@
+{% extends 'glossary/base.html' %}
+{% block content %}
+  <h2>Delete Term</h2>
+  <p>Are you sure you want to delete "<strong>{{ term.term }}</strong>"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'glossary' %}">Cancel</a>
+  </form>
+{% endblock %}

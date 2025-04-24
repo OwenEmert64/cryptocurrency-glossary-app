@@ -1,0 +1,17 @@
+{% extends 'glossary/base.html' %}
+{% block content %}
+  <h2>Edit Term</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label>Term:</label><br>
+    <input type="text" name="term" value="{{ term.term }}"><br><br>
+
+    <label>Definition:</label><br>
+    <textarea name="definition" rows="4">{{ term.definition }}</textarea><br><br>
+
+    <label>Category:</label><br>
+    <input type="text" name="category" value="{{ term.category }}"><br><br>
+
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}
