@@ -1,6 +1,7 @@
 {% extends 'glossary/base.html' %}
 {% block content %}
   <h2>Glossary</h2>
+  <p><a href="{% url 'create_term' %}">+ Add New Term</a></p>
   <ul>
     {% for term in terms %}
       <li><strong>{{ term.term }}</strong>: {{ term.definition }}</li>

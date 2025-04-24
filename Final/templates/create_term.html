@@ -1,0 +1,17 @@
+{% extends 'glossary/base.html' %}
+{% block content %}
+  <h2>Add a New Term</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label>Term:</label><br>
+    <input type="text" name="term"><br><br>
+
+    <label>Definition:</label><br>
+    <textarea name="definition" rows="4"></textarea><br><br>
+
+    <label>Category:</label><br>
+    <input type="text" name="category"><br><br>
+
+    <button type="submit">Add Term</button>
+  </form>
+{% endblock %}
