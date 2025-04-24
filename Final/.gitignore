@@ -1,0 +1,14 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+
+# SQLite DB
+db.sqlite3
+
+# Virtual environment
+venv/
+
+# Django migrations (optional)
+*/migrations/__pycache__/
+*.log
+

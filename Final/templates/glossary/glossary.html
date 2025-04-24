@@ -1,0 +1,11 @@
+{% extends 'glossary/base.html' %}
+{% block content %}
+  <h2>Glossary</h2>
+  <ul>
+    {% for term in terms %}
+      <li><strong>{{ term.term }}</strong>: {{ term.definition }}</li>
+    {% empty %}
+      <li>No terms available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
