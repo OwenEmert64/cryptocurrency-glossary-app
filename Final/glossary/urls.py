@@ -9,6 +9,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('glossary/', views.glossary_view, name='glossary'),
     path('glossary/add/', views.create_term, name='create_term'),
-
+    path('glossary/edit/<int:term_id>/', views.edit_term, name='edit_term'),
+    path('glossary/delete/<int:term_id>/', views.delete_term, name='delete_term'),
 ]
 
+ 
