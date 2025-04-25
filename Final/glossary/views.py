@@ -63,3 +63,12 @@ def delete_term(request, term_id):
         term.delete()
         return redirect('glossary')
     return render(request, 'glossary/delete_term.html', {'term': term})
+
+from django.http import JsonResponse
+
+@login_required
+def search_terms(request):
+    query = request.GET.get('q', '')
+    results = Term.objects.filter(term__icontains=query).values('term', 'definition', 'category')
+    return JsonResponse(list(results), safe=False)
+

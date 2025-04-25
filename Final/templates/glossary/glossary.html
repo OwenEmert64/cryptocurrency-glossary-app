@@ -3,7 +3,12 @@
   <h2>Glossary Terms</h2>
 
   <p><a href="{% url 'create_term' %}">+ Add New Term</a></p>
-  <ul>
+
+  <!-- 🧠 Search input -->
+  <input type="text" id="searchInput" placeholder="Search terms..." />
+
+  <!-- 🔁 Results container -->
+  <ul id="termList">
     {% for term in terms %}
       <li>
         <strong>{{ term.term }}</strong>: {{ term.definition }}
@@ -20,4 +25,3 @@
     {% endfor %}
   </ul>
 {% endblock %}
- 
