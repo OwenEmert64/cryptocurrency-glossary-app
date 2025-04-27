@@ -1,32 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Crypto Glossary</title>
+    <meta charset="UTF-8">
+    <title>Crypto Glossary</title>
+    <link rel="stylesheet" href="{% static 'glossary/style.css' %}">
 </head>
 <body>
-  <nav>
-    {% if user.is_authenticated %}
-      <p>
-        Welcome, {{ user.username }} |
-        <a href="{% url 'glossary' %}">Glossary</a> |
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" style="background:none;border:none;color:blue;cursor:pointer;text-decoration:underline;">Logout</button>
+
+    <!-- Navigation Bar -->
+    <nav style="text-align: center; margin-bottom: 20px;">
+        <form action="{% url 'glossary' %}" method="get" style="display:inline;">
+            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Glossary</button>
         </form>
-      </p>
-    {% else %}
-      <p>
-        <a href="{% url 'login' %}">Login</a> |
-        <a href="{% url 'signup' %}">Sign Up</a>
-      </p>
-    {% endif %}
-  </nav>
 
-  <hr>
+        <form action="{% url 'create_term' %}" method="get" style="display:inline;">
+            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Add Term</button>
+        </form>
 
-  {% block content %}
-  {% endblock %}
+        <form action="{% url 'profile' %}" method="get" style="display:inline;">
+            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Profile</button>
+        </form>
+
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Logout</button>
+        </form>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
 </body>
 </html>
- 

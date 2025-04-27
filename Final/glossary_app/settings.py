@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'glossary',  # glossary app
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +125,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/glossary/'
 LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'

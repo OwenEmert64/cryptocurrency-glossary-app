@@ -15,6 +15,6 @@ class Term(models.Model):
     category = models.CharField(max_length=50, blank=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    favorited_by = models.ManyToManyField(User, related_name='favorites', blank=True)
     def __str__(self):
         return self.term

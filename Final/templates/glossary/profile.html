@@ -1,0 +1,23 @@
+
+{% extends 'glossary/base.html' %}
+
+{% block content %}
+  <h2>{{ user.username }}'s Profile</h2>
+  <h3>Favorited Terms</h3>
+
+  {% if favorites %}
+    <ul>
+      {% for term in favorites %}
+        <li>
+          <strong>{{ term.term }}</strong>: {{ term.definition }}
+          {% if term.category %}
+            <em>({{ term.category }})</em>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have not favorited any terms yet.</p>
+  {% endif %}
+
+{% endblock %}

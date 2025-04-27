@@ -1,51 +1,71 @@
 {% extends 'glossary/base.html' %}
 {% block content %}
-  <h2>Glossary Terms</h2>
+<h2>Glossary Terms</h2>
 
-  <p><a href="{% url 'create_term' %}">+ Add New Term</a></p>
+<!-- Search and Category Filter -->
+<form method="GET" action="{% url 'glossary' %}">
+    <select name="category">
+        <option value="All">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat }}" {% if request.GET.category == cat %}selected{% endif %}>
+                {{ cat }}
+            </option>
+        {% endfor %}
+    </select>
 
-  <!-- 🧠 Search input -->
-  <input type="text" id="searchInput" placeholder="Search terms..." />
+    <input type="text" name="q" id="searchInput" placeholder="Search terms..." value="{{ request.GET.q }}">
+    <button type="submit">Filter</button>
+</form>
 
-  <!-- 🔁 Results container -->
-  <ul id="termList">
+<!-- Results container -->
+<ul id="termList">
     {% for term in terms %}
       <li>
         <strong>{{ term.term }}</strong>: {{ term.definition }}
         {% if term.category %}
           <em>({{ term.category }})</em>
         {% endif %}
-        {% if request.user == term.added_by %}
-          | <a href="{% url 'edit_term' term.id %}">Edit</a>
-          | <a href="{% url 'delete_term' term.id %}">Delete</a>
-        {% endif %}
+
+        <!-- Favorite button -->
+        <form method="POST" action="{% url 'toggle_favorite' term.id %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="star-button {% if user in term.favorited_by.all %}favorited{% endif %}">
+              {% if user in term.favorited_by.all %}
+                  ★
+              {% else %}
+                  ☆
+              {% endif %}
+          </button>
+      </form>
+      
+
       </li>
     {% empty %}
-      <li>No terms yet. <a href="{% url 'create_term' %}">Add one now.</a></li>
+      <li>No terms yet.</li>
     {% endfor %}
-  </ul>
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const termList = document.getElementById('termList');
-  
-    searchInput.addEventListener('input', async () => {
-      const query = searchInput.value;
-  
-      const response = await fetch(`/glossary/search/?q=${encodeURIComponent(query)}`);
-      const data = await response.json();
-  
-      termList.innerHTML = '';
-  
-      if (data.length === 0) {
+</ul>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const termList = document.getElementById('termList');
+
+searchInput.addEventListener('input', async () => {
+    const query = searchInput.value;
+
+    const response = await fetch(`/glossary/search/?q=${encodeURIComponent(query)}`);
+    const data = await response.json();
+
+    termList.innerHTML = '';
+
+    if (data.length === 0) {
         termList.innerHTML = '<li>No matching terms found.</li>';
-      } else {
+    } else {
         data.forEach(term => {
-          const li = document.createElement('li');
-          li.innerHTML = `<strong>${term.term}</strong>: ${term.definition} ${term.category ? `<em>(${term.category})</em>` : ''}`;
-          termList.appendChild(li);
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${term.term}</strong>: ${term.definition} ${term.category ? `<em>(${term.category})</em>` : ''}`;
+            termList.appendChild(li);
         });
-      }
-    });
-  </script>
-  
+    }
+});
+</script>
 {% endblock %}
