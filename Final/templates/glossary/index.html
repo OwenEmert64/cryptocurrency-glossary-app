@@ -1,5 +1,23 @@
 {% extends 'glossary/base.html' %}
+
 {% block content %}
-  <h1>Welcome to the Crypto Glossary App</h1>
-  <p>This is your entry point to the glossary world.</p>
+    <div class="index-container">
+        <div class="index-content">
+            <h1>Welcome to the Crypto Glossary!</h1>
+            <p class="description">
+                The Crypto Glossary is your go-to resource to learn and explore the world of cryptocurrency. Whether you're a beginner or an experienced crypto enthusiast, you'll find definitions, explanations, and key terms to help you understand the fast-paced world of digital currencies. Browse through our glossary, search for terms, or sign up to create your personalized glossary of terms!
+            </p>
+            
+            <!-- Buttons to Login or Sign Up -->
+            <div class="index-buttons">
+                <form action="{% url 'signup' %}" method="get">
+                    <button type="submit" class="index-button">Sign Up</button>
+                </form>
+                <form action="{% url 'login' %}" method="get">
+                    <button type="submit" class="index-button">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

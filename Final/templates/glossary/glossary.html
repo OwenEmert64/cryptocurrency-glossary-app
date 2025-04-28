@@ -20,28 +20,35 @@
 <!-- Results container -->
 <ul id="termList">
     {% for term in terms %}
-      <li>
-        <strong>{{ term.term }}</strong>: {{ term.definition }}
-        {% if term.category %}
-          <em>({{ term.category }})</em>
-        {% endif %}
+        <li>
+            <strong>{{ term.term }}</strong>: {{ term.definition }}
+            {% if term.category %}
+                <em>({{ term.category }})</em>
+            {% endif %}
 
-        <!-- Favorite button -->
-        <form method="POST" action="{% url 'toggle_favorite' term.id %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="star-button {% if user in term.favorited_by.all %}favorited{% endif %}">
-              {% if user in term.favorited_by.all %}
-                  ★
-              {% else %}
-                  ☆
-              {% endif %}
-          </button>
-      </form>
-      
+            <!-- Favorite button -->
+            <form method="POST" action="{% url 'toggle_favorite' term.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="star-button {% if user in term.favorited_by.all %}favorited{% endif %}">
+                    {% if user in term.favorited_by.all %}
+                        ★
+                    {% else %}
+                        ☆
+                    {% endif %}
+                </button>
+            </form>
 
-      </li>
+            <!-- Edit and Delete buttons (visible only for the term creator) -->
+            {% if term.added_by == user %}
+                <a href="{% url 'edit_term' term.id %}" class="btn">Edit</a>
+                <form method="POST" action="{% url 'delete_term' term.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Delete</button>
+                </form>
+            {% endif %}
+        </li>
     {% empty %}
-      <li>No terms yet.</li>
+        <li>No terms yet.</li>
     {% endfor %}
 </ul>
 
@@ -69,3 +76,4 @@ searchInput.addEventListener('input', async () => {
 });
 </script>
 {% endblock %}
+

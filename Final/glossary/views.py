@@ -20,6 +20,7 @@ def signup_view(request):
             return redirect('login')
     else:
         form = UserCreationForm()
+
     return render(request, 'glossary/signup.html', {'form': form})
 
 # Glossary Main Page - Search + Filter
