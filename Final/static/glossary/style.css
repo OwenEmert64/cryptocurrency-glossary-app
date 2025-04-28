@@ -1,0 +1,103 @@
+/* General body and layout */
+body {
+    background-color: #121212; /* Dark background */
+    color: white;  /* White text */
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    padding: 20px;
+    margin: 0;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Glossary Terms (bubbles) */
+#termList li {
+    background-color: #6A0DAD;  
+    color: white; 
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);  /* Shadow */
+    transition: all 0.3s ease-in-out;  /* Hover effect */
+}
+
+#termList li:hover {
+    background-color: #4B0082; 
+    transform: translateY(-5px); /* Lift effect */
+}
+
+/* Glossary List - no bullet points */
+#termList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Buttons */
+button[type="submit"] {
+    background-color: #6A0DAD; 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #4B0082; 
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #6A0DAD; 
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);  /* Soft shadow */
+}
+
+nav button {
+    background-color: #121212;  /* Black background for buttons */
+    color: white;
+    font-weight: bold;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+nav button:hover {
+    background-color: #4B0082; 
+    text-decoration: underline;
+}
+
+nav a, nav button {
+    color: white !important;  /* Force all text to be white (I KEEP HAVING A PROBLEM WITH IT BEING GREEN) */
+}
+
+/* Form*/
+input, select {
+    padding: 10px;
+    margin: 5px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #4B0082;  
+    background-color: #121212; 
+    color: white;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #6A0DAD; 
+}
+
+/* Success/Error Messages */
+.alert {
+    padding: 10px;
+    background-color: #4B0082;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}

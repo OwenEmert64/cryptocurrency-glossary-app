@@ -41,6 +41,11 @@ def glossary(request):
         'categories': categories,
     })
 
+def glossary_view(request):
+    terms = Term.objects.all()  # Make sure terms are being passed to the template
+    return render(request, 'glossary/glossary.html', {'terms': terms})
+
+
 # Create Term
 @login_required
 def create_term(request):

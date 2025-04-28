@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Crypto Glossary</title>
-    <link rel="stylesheet" href="{% static 'glossary/style.css' %}">
+    <link rel="stylesheet" href="{% static '/glossary/style.css' %}">
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <nav style="text-align: center; margin-bottom: 20px;">
         <form action="{% url 'glossary' %}" method="get" style="display:inline;">
-            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Glossary</button>
+            <button type="submit" style="background:none; border:none; cursor:pointer; font-weight:bold;">Glossary</button>
         </form>
 
         <form action="{% url 'create_term' %}" method="get" style="display:inline;">
-            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Add Term</button>
+            <button type="submit" style="background:none; border:none; cursor:pointer; font-weight:bold;">Add Term</button>
         </form>
 
         <form action="{% url 'profile' %}" method="get" style="display:inline;">
-            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Profile</button>
+            <button type="submit" style="background:none; border:none; cursor:pointer; font-weight:bold;">Profile</button>
         </form>
 
         <form action="{% url 'logout' %}" method="post" style="display:inline;">
             {% csrf_token %}
-            <button type="submit" style="background:none; border:none; color:#4CAF50; cursor:pointer; font-weight:bold;">Logout</button>
+            <button type="submit" style="background:none; border:none; cursor:pointer; font-weight:bold;">Logout</button>
         </form>
     </nav>
 
